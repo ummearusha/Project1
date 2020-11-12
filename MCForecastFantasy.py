@@ -24,6 +24,8 @@ class MCSimulation:
         simulated weekly data from Monte Carlo
     simulated_szn_points : pandas.DataFrame
         simulated season data from Monte Carlo
+    szn_end_points : pandas.DataFrame
+        simulated points at end of season
     weekly_confidence_interval: pandas.Series
         the95% confidence intervals for weekly points
     szn_confidence_interval: pandas.Series
@@ -49,6 +51,7 @@ class MCSimulation:
         self.nGame=number_game
         self.simulated_weekly_points=""
         self.simulated_szn_points=""
+        self.szn_end_points=""
         
     def calc_points(self):
         
@@ -84,8 +87,9 @@ class MCSimulation:
         
         #Run the simulation of projecting points scored nSim number of times
         for n in range(self.nSim):
-            if n%10 ==0:
-                print(f"Running Monte Carlo simulation number {n}.")
+            #uncomment the below if you want to see each time that the simulation runs
+            #if n%10 ==0:
+             #   print(f"Running Monte Carlo simulation number {n}.")
             sim_vals_week=[]
             sim_vals_szn=[]
         
@@ -109,6 +113,7 @@ class MCSimulation:
         #set attributes used for weekly and season long plotting
         self.simulated_weekly_points=points_weekly
         self.simulated_szn_points=points_szn
+        self.szn_end_points=points_szn.iloc[-1,:]
         
         #Calculate 95% confidence intervals for cumulative and weekly points
         self.weekly_confidence_interval=points_weekly.iloc[-1,:].quantile(q=[0.025,0.975])
