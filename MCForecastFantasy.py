@@ -10,7 +10,7 @@ import pytz
 
 class MCSimulation:
     """
-    A Python Class for running Monte Carolo Simulations on player rosters
+    A Python Class for running Monte Carlo Simulations on player rosters
     
     Attributes
     __________
